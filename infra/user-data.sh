@@ -34,10 +34,10 @@ sudo cat << CWAgentConfig > /opt/aws/amazon-cloudwatch-agent/bin/config.json
 			]
 		],
 		"append_dimensions": {
-			"AutoScalingGroupName": "${aws:AutoScalingGroupName}",
-			"ImageId": "${aws:ImageId}",
-			"InstanceId": "${aws:InstanceId}",
-			"InstanceType": "${aws:InstanceType}"
+			"AutoScalingGroupName": "\${aws:AutoScalingGroupName}",
+			"ImageId": "\${aws:ImageId}",
+			"InstanceId": "\${aws:InstanceId}",
+			"InstanceType": "\${aws:InstanceType}"
 		},
 		"metrics_collected": {
 			"cpu": {
