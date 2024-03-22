@@ -1,0 +1,7 @@
+Flask
+markupsafe
+Jinja2
+Werkzeug
+Flask-Cors
+Flask-Bootstrap
+pymysql

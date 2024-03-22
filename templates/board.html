@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'common_head.html' %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >자유게시판</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrMz9f5EGYYuId1w5sBO9VCA" crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+
+    
+
+    <div class="container mt-4 bg-white p-4 rounded shadow">
+        <h1 class="text-center mb-4;" style="font-style: black;  color:black;">자유 게시판</h1>
+
+        <table class="table table-hover table-striped text-center border">
+            <thead class="table-dark">
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>글쓴이</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for i in data_list %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><a href="{{ url_for('board.post', postno=i[0] ) }}" class="text-decoration-none">{{ i[2] }}</a> 
+                            {% if i[5] != 0 %}
+                                <span style="font-size: 11px;">[{{ i[5] }}]</span></td>
+                            {% endif %}
+                        <td>{{ i[1] }}</td>
+                        <td>{{ i[4] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                {{ pagination.links }}
+            </ul>
+        </div>
+		
+	<div>
+                <a class="btn btn-outline-info float-end mt-3" href="/makepost">글쓰기</a>
+                <form action="/board", method='POST'>
+                        <input type="text" name="posttitle" >
+                        <button type="submit">검색</button>
+                </form>
+        </div>
+    </div>
+
+    {% include 'common_script.html' %}
+</body>
+
+</html>

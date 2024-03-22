@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    {% include 'common_head.html' %}
+    </style>
+</head>
+
+<body class="bg-light">
+    <div class="container bg-white p-4 rounded shadow">
+        <h1 class="text-center mb-4">마이페이지</h1>
+
+        <table class="table table-hover table-striped text-center border">
+            <tbody>
+                {% for key, value in session['login_info'].items() %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <form action="/mypage2" method="post">
+            <div class="d-flex justify-content-between">
+                <input type="submit" name="submitType" value="회원정보수정" class="btn btn-primary">
+                <input type="submit" name="submitType" value="탈퇴하기" class="btn btn-danger">
+            </div>
+        </form>
+    </div>
+
+    {% include 'common_script.html' %}
+</body>
+
+</html>

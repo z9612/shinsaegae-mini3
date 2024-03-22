@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일정 상세 정보</title>
+    {% include 'common_head.html' %}
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-3"><strong>일정 상세 정보</strong></h2>
+
+        <form action="/update_event" method="POST" id="updateForm">
+            <div class="row">
+                <input type="hidden" value="{{ result['id'] }}" name="id" required readonly>
+            </div>
+            <div class="form-group row">
+                <label for="event_name" class="col-sm-2 col-form-label">일정명</label>
+                <div class="col-sm-10">
+                    <input type="text" name="event_name" class="form-control" value="{{ result['title'] }}" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="memo" class="col-sm-2 col-form-label">메모</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{ result['memo'] }}" name="memo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="from_date" class="col-sm-2 col-form-label">시작 날짜</label>
+                <div class="col-sm-10">
+                    <div class='input-group date' id='from_date'>
+                        <input type='text' name="from_date" class="form-control" value="{{ result['start_date'] }}" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="end_date" class="col-sm-2 col-form-label">종료 날짜</label>
+                <div class="col-sm-10">
+                    <div class='input-group date' id='end_date'>
+                        <input type='text' name="end_date" class="form-control" value="{{ result['end_date'] }}" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="priority" class="col-sm-2 col-form-label">중요도</label>
+                <div class="col-sm-10">
+                    <select id="priority" name="priority" class="form-control">
+                        <option value="높음" {% if result['class']=='event-important' %}selected{% endif %}>높음</option>
+                        <option value="중간" {% if result['class']=='event-info' %}selected{% endif %}>중간</option>
+                        <option value="낮음" {% if result['class']=='' %}selected{% endif %}>낮음</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <input type="submit" name="submitType" value="수정" class="btn btn-primary" onclick="confirmAction(event,'수정')" />
+                    <input type="submit" name="submitType" value="삭제" class="btn btn-danger" onclick="confirmAction(event,'삭제')" />
+                </div>
+            </div>
+        </form>
+        <form action="/chatroom2" method="POST" id="shareForm">
+            <input type="hidden" value="{{ result['id'] }}" name="id" required readonly >
+            <input type="hidden" value="{{ result['title'] }}" name="title" required readonly>
+            <input type="hidden" value="{{ result['memo'] }}" name="memo" required readonly>
+            <input type="hidden" value="{{ result['start_date'] }}" name="start_date" required readonly>
+            <input type="hidden" value="{{ result['end_date'] }}" name="end_date" required readonly>
+            <input type="hidden" value="{{ result['class'] }}" name="end_date" required readonly>
+            <!-- 필요한 공유 폼 데이터 추가 -->
+        
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <input type="submit" name="submitType" value="공유하러가기" class="btn btn-danger" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Add jQuery UI and Timepicker scripts -->
+    {% include 'common_script.html' %}
+    <!-- Bootstrap 및 jQuery 추가 -->
+    <script>
+        $(document).ready(function () {
+            $('#from_date, #end_date').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm'
+            });
+        });
+    
+        function confirmAction(event, actionType) {
+            // confirm 함수는 사용자에게 확인 창을 띄우고 OK 또는 취소 버튼을 클릭하도록 합니다.
+            var confirmationMessage = (actionType === '수정') ? "정말 수정하시겠습니까?" : "정말 삭제하시겠습니까?";
+
+            var confirmResult = confirm(confirmationMessage);
+            
+            if (!confirmResult) {
+                event.preventDefault(); // 이벤트 취소
+            } else {
+                document.getElementById("updateForm").submit();
+            }
+        }
+    </script>
+</body>
+
+</html>

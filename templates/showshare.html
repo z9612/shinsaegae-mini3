@@ -1,0 +1,32 @@
+<!--index.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'common_head.html' %}
+    <title>채팅방{{result1[1]}}</title>
+    <H1> 채팅방에 공유된목록</H1> 
+</head>
+<body>
+    {% for i in range(3,3+(result1[0]*2),2) %}
+		
+    <tr>
+
+        <form action="/chatroom/date" method="post">
+            <td> 유저{{ result1[i]}}가 공유한일정 : {{result1[i+1]}}</td> <input type="hidden" name='chatid' value="{{result1[1]}}">    <input type="hidden"name ='userno' value="{{result1[2]}}" >
+	    <input type="hidden" name="userid" value="{{session['login_info'].userid}}"> 
+            <input type="hidden" name ='event' value="{{result1[i+1]}}">
+           <tr><input type="submit"  value="일정공유 추가하기" /></tr>
+       </form>
+    </tr>
+    {% endfor %}
+
+    <br>
+    <br>
+    <br>
+    <a href="/chatroom/chat" onclick="leave_room();">채팅방 나가기</a>
+    <a href="/" onclick="leave_room();">초기화면으로</a>
+
+</body>
+{% include 'common_script.html' %}
+</html>

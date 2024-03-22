@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'common_head.html' %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탈퇴 확인</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>탈퇴하겠습니까?</h1>
+
+        <form action="/delete2" method="post">
+            <div class="d-flex justify-content-center">
+                <input type="submit" name="submitType" value="네" class="btn btn-danger">
+                <input type="submit" name="submitType" value="아니오" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+    {% include 'common_script.html' %}
+</body>
+
+</html>
