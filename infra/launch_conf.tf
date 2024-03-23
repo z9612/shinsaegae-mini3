@@ -12,17 +12,6 @@ resource "aws_launch_configuration" "web" {
  }
 }
 
-#CloudWatch Agent Role 
-data "aws_iam_role" "cwagent_role" {
-  name = "CWAgentRole"
-}
-
-resource "aws_iam_instance_profile" "cwagent_profile" {
-  name = "CWAgentProfile"
-  role = data.aws_iam_role.cwagent_role.name
-}
-
-
 resource "aws_launch_configuration" "was" {
  name_prefix = "was-"
  image_id = "ami-02c956980e9e063e5"
