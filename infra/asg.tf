@@ -3,7 +3,7 @@ resource "aws_autoscaling_group" "web" {
   min_size              = 1
   desired_capacity      = 2
   max_size              = 4
-  health_check_type     = "ELB"
+  health_check_type     = "EC2"
   launch_configuration  = aws_launch_configuration.web.name
   enabled_metrics       = [
     "GroupMinSize",
