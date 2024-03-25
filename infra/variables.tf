@@ -1,14 +1,14 @@
 # 1. VPC Subnet variables
 variable "public_subnet" {
- type = list(string)
- description = "Public Subnet CIDR values"
- default = ["10.0.1.0/24", "10.0.2.0/24"]
+  type        = list(string)
+  description = "Public Subnet CIDR values"
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
 variable "private_subnet" {
- type = list(string)
- description = "Private Subnet CIDR values"
- default = ["10.0.11.0/24", "10.0.12.0/24"]
+  type        = list(string)
+  description = "Private Subnet CIDR values"
+  default     = ["10.0.11.0/24", "10.0.12.0/24"]
 }
 
 variable "rds_subnet" {
@@ -19,7 +19,7 @@ variable "rds_subnet" {
 
 # 2.AZS variables
 variable "azs" {
- type = list(string)
- description = "Availability Zones"
- default = ["ap-northeast-2a","ap-northeast-2c"]
+  type        = list(string)
+  description = "Availability Zones"
+  default     = ["ap-northeast-2a", "ap-northeast-2c"]
 }

@@ -18,8 +18,8 @@ resource "aws_lb_target_group" "asg_tg" {
     path                = "/"
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    timeout             = 5   # 5초의 타임아웃
-    interval            = 30  # 30초 간격으로 헬스 체크	
+    timeout             = 5  # 5초의 타임아웃
+    interval            = 30 # 30초 간격으로 헬스 체크	
   }
 }
 
@@ -59,8 +59,8 @@ resource "aws_lb_target_group" "internal_asg_tg" {
     path                = "/"
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    timeout             = 5   # 5초의 타임아웃
-    interval            = 30  # 30초 간격으로 헬스 체크
+    timeout             = 5  # 5초의 타임아웃
+    interval            = 30 # 30초 간격으로 헬스 체크
   }
 }
 
