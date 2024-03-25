@@ -1,0 +1,44 @@
+- hosts: _web
+  become: yes
+  handlers:
+  tasks:
+    - name: Install Python
+      dnf:
+        name: python3
+        state: present
+
+    - name: Install pip  
+      dnf:
+        name: python3-pip
+        state: present
+
+    - name: Install boto
+      pip:
+        name:
+          - boto3
+          - botocore
+        state: present
+
+    - name: Get ELB DNS name
+      amazon.aws.elb_application_lb_info:
+        region: ap-northeast-2
+        names:
+          - "terraform-internal-alb"
+      register: elb_result
+
+    - name: print log
+      debug:
+        var: elb_result
+    
+    - name: Add location block to nginx.conf
+      ansible.builtin.lineinfile:
+        path: /etc/nginx/nginx.conf
+        insertafter: '^\s*include /etc/nginx/default.d/\*\.conf;'
+        line: |
+          location / {
+            proxy_pass http://{{ elb_result.load_balancers[0].dns_name }}:80/;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          }
+

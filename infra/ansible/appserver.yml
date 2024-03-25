@@ -1,0 +1,78 @@
+---
+- hosts: _was
+  become: yes
+
+  tasks:
+    - name: Install Python
+      dnf:
+        name: python3
+        state: present
+
+    - name: Install pip
+      dnf:
+        name: python3-pip
+        state: present
+    - name: Install Flask
+      pip:
+        name: flask
+        state: present
+    - name: Install boto3 and botocore for Python
+      ansible.builtin.pip:
+        name:
+          - boto3
+          - botocore
+        state: present
+    - name: Install Git
+      dnf:
+        name: git
+        state: present
+    - name: Remove existing git repository directory if it exists
+      ansible.builtin.file:
+        path: /home/ec2-user/shinshagae-mini
+        state: absent
+      become: yes
+    - name: Clone Git Repository
+      git:
+        repo: https://github.com/z9612/shinsaegae-mini3.git
+        dest: /home/ec2-user/shinshagae-mini
+        update: yes
+     # RDS 인스턴스 정보 조회
+    - name: Get RDS instance information
+      community.aws.rds_instance_info:
+        region: ap-northeast-2
+        db_instance_identifier: "terraform-mysql"
+      register: rds_result
+        
+    - name: Install Application Dependencies
+      pip:
+        requirements: /home/ec2-user/shinshagae-mini/requirements.txt
+    
+    - name : show debug
+      debug:
+        var: rds_result
+    - name: Replace text
+      ansible.builtin.replace:
+        path: /home/ec2-user/shinshagae-mini/dbconnect.py
+        regexp: 'database-1.cjy2bjpz7ukq.ap-northeast-2.rds.amazonaws.com'
+        replace: '{{ rds_result.instances[0].endpoint.address }}'
+    - name: Replace text
+      ansible.builtin.replace:
+        path: /home/ec2-user/shinshagae-mini/db_config.py
+        regexp: 'database-1.cjy2bjpz7ukq.ap-northeast-2.rds.amazonaws.com'
+        replace: '{{ rds_result.instances[0].endpoint.address }}'
+    
+    - name: Copy Systemd Unit file
+      copy:
+        src: flaskapp.service
+        dest: /etc/systemd/system/flaskapp.service
+        owner: root
+        group: root
+        mode: 0644
+    - name: Reload systemd daemon
+      command: systemctl daemon-reload
+    - name: Start and enable Flask App service
+      service:
+        name: flaskapp
+        state: started
+        enabled: yes
+
