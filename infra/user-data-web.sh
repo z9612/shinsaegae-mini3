@@ -109,3 +109,12 @@ sudo dnf install collectd -y
 # Start CloudWatch Agent
 cd /opt/aws/amazon-cloudwatch-agent/bin
 sudo ./amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:./config.json
+
+# Sudoers 수정
+sudo sed -i '/^%wheel\s*ALL=(ALL)\s*ALL/s/^/#/' /etc/sudoers
+echo '%wheel ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+sudo usermod -aG wheel ec2-user
+
+# SSH 설정
+echo "PubkeyAuthentication yes" | sudo tee -a /etc/ssh/sshd_config
+sudo systemctl restart sshd
