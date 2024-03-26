@@ -65,7 +65,6 @@ resource "aws_lb_listener" "alb_listener_prometheus" {
   }
 }
 
-
 # Target Group 리소스 정의
 resource "aws_lb_target_group" "terraform-grafana-tg" {
   name        = "terraform-grafana-tg"

@@ -24,7 +24,11 @@ resource "aws_autoscaling_group" "web" {
   }
 
   #사용하는 Application Load Balancer의 ID를 직접 지정합니다.
-  target_group_arns = [aws_lb_target_group.asg_tg.arn]
+  target_group_arns = [
+    aws_lb_target_group.asg_tg.arn,
+    aws_lb_target_group.terraform-prometheus-tg.arn,
+    aws_lb_target_group.terraform-grafana-tg.arn
+  ]
 }
 
 resource "aws_autoscaling_group" "was" {

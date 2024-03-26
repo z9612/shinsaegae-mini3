@@ -55,7 +55,12 @@ resource "aws_iam_policy" "describeLB_policy" {
             "Action": "ec2:*",
             "Effect": "Allow",
             "Resource": "*"
-        }
+        },
+	{
+	   "Action": "rds:*",
+           "Effect": "Allow",
+           "Resource": "*"
+ 	}
     ]
 }
 

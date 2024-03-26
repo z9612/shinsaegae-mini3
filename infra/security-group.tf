@@ -19,6 +19,27 @@ resource "aws_security_group" "terrarform-bastion-sg" {
   }
 }
 
+resource "aws_security_group" "control-sg" {
+  name        = "terrarform-control-sg"
+  description = "Security Group for terraform control instance"
+  vpc_id      = aws_vpc.main-vpc.id
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "terrarform-control-sg"
+  }
+}
+
 
 resource "aws_security_group" "terrarform-alb-sg" {
   name        = "terrarform-alb-sg"
