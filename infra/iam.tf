@@ -129,7 +129,7 @@ EOF
 
 
 
-#firehose IAM role 과 정책을 연결
+#was role 과 정책을 연결
 resource "aws_iam_role_policy_attachment" "aws_attachment" {
   policy_arn = aws_iam_policy.rds_policy.arn
   role       = aws_iam_role.was_role.name

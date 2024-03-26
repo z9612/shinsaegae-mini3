@@ -3,6 +3,7 @@ resource "aws_subnet" "public_subnets" {
   vpc_id            = aws_vpc.main-vpc.id
   cidr_block        = element(var.public_subnet, count.index)
   availability_zone = element(var.azs, count.index)
+  map_public_ip_on_launch = true #퍼블릭 IP 주소를 할당
   tags = {
     Name = "Public Subnet0${count.index + 1}"
   }

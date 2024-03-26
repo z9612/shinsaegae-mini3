@@ -1,6 +1,6 @@
 # 로그 저장용 S3 버킷 생성
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket = "giun-terraform-log-bucket-test"
+  bucket = "giun-terraform-log-bucket"
 }
 
 # CloudWatch Log Group 생성

@@ -1,5 +1,5 @@
 resource "aws_instance" "control" {
-  ami                         = "ami-0345455a44c0061e3"
+  ami                         = "ami-0b963ba6ddc7de2c3"
   instance_type               = "t3.large"
   vpc_security_group_ids      = [aws_security_group.control-sg.id]
   key_name                    = aws_key_pair.project-key.key_name
