@@ -42,7 +42,7 @@ resource "aws_iam_policy" "rds_policy" {
   description = "rds full access"
 
   policy = <<EOF
-  {
+{
     "Version": "2012-10-17",
     "Statement": [
         {
@@ -107,20 +107,17 @@ resource "aws_iam_policy" "rds_policy" {
             }
         },
         {
+            "Effect": "Allow",
             "Action": [
                 "devops-guru:SearchInsights",
                 "devops-guru:ListAnomaliesForInsight"
             ],
-            "Effect": "Allow",
             "Resource": "*",
             "Condition": {
                 "ForAllValues:StringEquals": {
                     "devops-guru:ServiceNames": [
                         "RDS"
                     ]
-                },
-                "Null": {
-                    "devops-guru:ServiceNames": "false"
                 }
             }
         }
@@ -128,6 +125,9 @@ resource "aws_iam_policy" "rds_policy" {
 }
 EOF
 }
+
+
+
 
 #firehose IAM role 과 정책을 연결
 resource "aws_iam_role_policy_attachment" "aws_attachment" {
