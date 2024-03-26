@@ -18,6 +18,8 @@ resource "aws_launch_configuration" "was" {
   instance_type   = "t3.large"
   key_name        = aws_key_pair.project-key.key_name
   security_groups = [aws_security_group.terrarform-internal-asg-sg.id]
+  
+  iam_instance_profile = aws_iam_instance_profile.was_profile.name #추가
   lifecycle {
     create_before_destroy = true
   }
