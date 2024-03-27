@@ -1,7 +1,7 @@
 resource "aws_launch_configuration" "web" {
   name_prefix          = "web-"
   image_id             = "ami-02c956980e9e063e5"
-  instance_type        = "t3.large"
+  instance_type        = "t2.micro"
   key_name             = aws_key_pair.project-key.key_name
   security_groups      = [aws_security_group.terrarform-asg-sg.id]
   user_data            = file("user-data-web.sh")
@@ -15,7 +15,7 @@ resource "aws_launch_configuration" "web" {
 resource "aws_launch_configuration" "was" {
   name_prefix     = "was-"
   image_id        = "ami-02c956980e9e063e5"
-  instance_type   = "t3.large"
+  instance_type   = "t2.micro"
   key_name        = aws_key_pair.project-key.key_name
   security_groups = [aws_security_group.terrarform-internal-asg-sg.id]
   

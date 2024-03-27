@@ -1,6 +1,6 @@
 resource "aws_instance" "control" {
-  ami                         = "ami-0b963ba6ddc7de2c3"
-  instance_type               = "t3.large"
+  ami                         = "ami-043a2e5ebdb65b02d"
+  instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.control-sg.id]
   key_name                    = aws_key_pair.project-key.key_name
   subnet_id                   = aws_subnet.public_subnets[1].id

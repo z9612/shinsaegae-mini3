@@ -118,3 +118,13 @@ sudo usermod -aG wheel ec2-user
 # SSH 설정
 echo "PubkeyAuthentication yes" | sudo tee -a /etc/ssh/sshd_config
 sudo systemctl restart sshd
+
+# node_exporter 설치
+sudo mkdir tmp
+cd tmp
+wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+tar xvfz node_exporter-1.7.0.linux-amd64.tar.gz
+cd node_exporter-1.7.0.linux-amd64
+
+# node_exporter 실행
+sudo nohup ./node_exporter &

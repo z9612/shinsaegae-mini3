@@ -4,7 +4,7 @@ resource "aws_db_instance" "terraform_rds" {
   max_allocated_storage = 100
   engine                = "mariadb"
   engine_version        = "10.5.20"
-  instance_class        = "db.t3.large"
+  instance_class        = "db.t2.micro"
   db_name               = "terraformdb"
   username              = "nana"
   password              = "nana1234"
