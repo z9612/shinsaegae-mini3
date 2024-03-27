@@ -12,6 +12,14 @@ CREATE TABLE `user` (
   UNIQUE KEY `id_UNIQUE` (`userno`)
 ) ;
 
+DROP TABLE IF EXISTS `calendar`;
+CREATE TABLE `calendar` (
+  `calendarno` int NOT NULL COMMENT '캘린더no',
+  `userno` int NOT NULL COMMENT '유저no',
+  PRIMARY KEY (`calendarno`),
+  KEY `new_userno_idx` (`userno`),
+  CONSTRAINT `fk_calendar_userno` FOREIGN KEY (`userno`) REFERENCES `user` (`userno`) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 DROP TABLE IF EXISTS `schedule`;
 CREATE TABLE `schedule` (
@@ -25,14 +33,6 @@ CREATE TABLE `schedule` (
   CONSTRAINT `fk_schedule_userid` FOREIGN KEY (`userno`) REFERENCES `calendar` (`userno`)
 );
 
-DROP TABLE IF EXISTS `calendar`;
-CREATE TABLE `calendar` (
-  `calendarno` int NOT NULL COMMENT '캘린더no',
-  `userno` int NOT NULL COMMENT '유저no',
-  PRIMARY KEY (`calendarno`),
-  KEY `new_userno_idx` (`userno`),
-  CONSTRAINT `fk_calendar_userno` FOREIGN KEY (`userno`) REFERENCES `user` (`userno`) ON DELETE CASCADE ON UPDATE CASCADE
-); 
 DROP TABLE IF EXISTS `event`;
 CREATE TABLE `event` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
