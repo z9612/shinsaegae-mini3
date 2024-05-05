@@ -7,7 +7,7 @@
 ![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/a96b3cc7-6286-4f95-aea0-3ed290bc05e8)
 ![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/ccedebc2-ef52-4a5a-af23-b4c512eccfe2)
 ![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/31ff1a0c-ae75-4228-8f9f-bb1737bca513)
-![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/0486f0c6-3310-42d4-9a7f-5b60d30ed403)
+![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/864e150f-33c8-4268-9027-dda2797ced73)
 ![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/1cdd5142-d4ab-48bf-8fad-51b27ed5c3a8)
 ![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/d001d47f-7f1e-4dfb-be88-27aa74b0cff6)
 ![image](https://github.com/z9612/shinsaegae-mini3/assets/50051891/e439bfb6-11fb-4016-9df0-872f0181f94e)
